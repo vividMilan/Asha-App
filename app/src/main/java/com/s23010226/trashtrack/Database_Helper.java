@@ -28,7 +28,7 @@ public class Database_Helper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, USERNAME TEXT, EMAIL TEXT, PHONE_NUMBER TEXT, PASSWORD TEXT)");
+        db.execSQL("CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT UNIQUE, password TEXT)");
     }
 
     @Override
@@ -48,15 +48,11 @@ public class Database_Helper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public boolean validateUser(String email, String password){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT * FROM " + TABLE + "WHERE " + COL_3 + "=? AND " + COL_5 + "=?", new String[]{email, password}
-        );
-
-        boolean valid = (cursor.getCount() > 0);
+    public boolean validateUser(String username, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users_table WHERE username = ? AND password = ?", new String[]{username, password});
+        boolean exists = cursor.getCount() > 0;
         cursor.close();
-        return valid;
+        return exists;
     }
 }

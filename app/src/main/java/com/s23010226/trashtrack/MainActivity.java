@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_login, btn_craateAccount;
+    Button btn_login, btn_createAccount;
     EditText editUsername, editPassword;
 
     Database_Helper db;
@@ -32,11 +32,13 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        db = new Database_Helper(MainActivity.this);
+
         editUsername = findViewById(R.id.editTextUsername);
         editPassword = findViewById(R.id.editTextPassword);
 
         btn_login = findViewById(R.id.btn_login);
-        btn_craateAccount = findViewById(R.id.btnCreateAccount);
+        btn_createAccount = findViewById(R.id.btnCreateAccount);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,10 +65,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_craateAccount.setOnClickListener(new View.OnClickListener() {
+        btn_createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Dashboard_Public.class);
+                Intent intent = new Intent(MainActivity.this, Sign_Up.class);
                 startActivity(intent);
             }
         });

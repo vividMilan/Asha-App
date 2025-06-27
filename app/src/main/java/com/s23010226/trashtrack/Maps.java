@@ -17,10 +17,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
 
@@ -89,6 +91,9 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         myMap = googleMap;
+        LatLng openUniversity = new LatLng(6.883349338499212, 79.88670074849543);
+        myMap.addMarker(new MarkerOptions().position(openUniversity).title("Open University"));
+        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(openUniversity, 18.0f));
         myMap.getUiSettings().setZoomControlsEnabled(true);
     }
 }
